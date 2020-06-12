@@ -46,7 +46,7 @@ public class CustomSimpleReport extends SimpleReport
 
 			sb.append(delimiter);
 			log.info(sb.toString());
-			AllureAttachment.attachText(sb.toString());
+//			AllureAttachment.attachText(sb.toString());
 		}
 	}
 

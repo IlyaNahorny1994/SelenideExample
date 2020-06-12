@@ -1,35 +1,36 @@
 package by.rw.test;
 
-import static com.codeborne.selenide.CollectionCondition.size;
-import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.page;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import org.openqa.selenium.By;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import by.rw.test.base.BaseTest;
+import by.rw.framework.base.test.BaseTest;
 import by.rw.model.ScheduleInfoModel;
 import by.rw.page.PassengerServicesPage;
 
 public class SimpleTest extends BaseTest
 {
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
 	@BeforeMethod
 	public void beforeTestMethod()
 	{
 		onHomePage()
-				.fillInFromField("Минск-Пассажирский")
-				.fillInToField("Молодечно")
-				.fillInWhereField("07.06.2020")
-				.submit();
+				.searchWay(getTestDataProperties().getProperty("text.minskPasazyrski"),
+						getTestDataProperties().getProperty("text.maladziecna"),
+						dtf.format(LocalDateTime.now().plusDays(5)));
 	}
 
 	@Test
 	public void verifyOneWayRadioButtonIsCheckedByDefault()
 	{
 		page(PassengerServicesPage.class)
-				.shouldBeCheckedRadioButton("В одну сторону");
+				.shouldBeCheckedRadioButton(getTestDataProperties().getProperty("radiobutton.oneWay"));
 	}
 
 	@Test
@@ -38,13 +39,14 @@ public class SimpleTest extends BaseTest
 		page(PassengerServicesPage.class)
 				.checkElectronicRegistrationCheckBox()
 				.electronicRegistrationCheckBoxShouldBeChecked()
-				.allScheduleItemsContainsButton("Выбрать места");
+				.allScheduleItemsContainsButton(getTestDataProperties().getProperty("button.chooseSeats"));
 	}
 
 	@Test
 	public void verifyCountOfDateFilters()
 	{
-		$$(By.xpath("//li[contains(@class, 'sch-links__item')]")).shouldHave(size(5));
+		page(PassengerServicesPage.class)
+				.countOfDateFiltersShouldHaveSize(5);
 	}
 
 	@Test

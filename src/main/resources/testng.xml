@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-	<test name="RwProjectTest">
+<!--<suite name="Suite1">-->
+<!--	<test name="SimpleTest">-->
+<!--		<classes>-->
+<!--			<class name="by.rw.test.SimpleTest">-->
+<!--&lt;!&ndash;				<methods>&ndash;&gt;-->
+<!--&lt;!&ndash;					<include name="verifyOneWayRadioButtonIsCheckedByDefault"/>&ndash;&gt;-->
+<!--&lt;!&ndash;				</methods>&ndash;&gt;-->
+<!--			</class>-->
+<!--		</classes>-->
+<!--	</test>-->
+<!--	<test name="SimpleTestWithProxy">-->
+<!--		<classes>-->
+<!--			<class name="by.rw.test.SimpleTestWithProxy">-->
+<!--			</class>-->
+<!--		</classes>-->
+<!--	</test>-->
+<!--</suite>-->
+<suite name="Suite1">
+<!--	<test name="SimpleTest">-->
+<!--		<classes>-->
+
+<!--			<class name="by.rw.test.SimpleTest">-->
+<!--&lt;!&ndash;								<methods>&ndash;&gt;-->
+<!--&lt;!&ndash;									<include name="verifyCountOfDateFilters"/>&ndash;&gt;-->
+<!--&lt;!&ndash;								</methods>&ndash;&gt;-->
+<!--			</class>-->
+<!--		</classes>-->
+<!--	</test>-->
+	<test name="SimpleTestWithProxy">
 		<classes>
-			<class name="by.rw.test.SimpleTest">
-<!--				<methods>-->
-<!--					<include name="collectTrainsInformation"/>-->
-<!--				</methods>-->
-			</class>
 			<class name="by.rw.test.SimpleTestWithProxy">
 			</class>
 		</classes>

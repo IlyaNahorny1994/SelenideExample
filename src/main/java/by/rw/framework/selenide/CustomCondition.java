@@ -1,4 +1,4 @@
-package by.rw;
+package by.rw.framework.selenide;
 
 import org.openqa.selenium.WebElement;
 

@@ -1,6 +1,7 @@
 package by.rw.page;
 
-import static by.rw.CustomCondition.valueInAttribute;
+import static by.rw.framework.selenide.CustomCondition.valueInAttribute;
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -15,6 +16,7 @@ import org.openqa.selenium.By;
 import com.codeborne.selenide.SelenideElement;
 
 import by.rw.model.ScheduleInfoModel;
+import io.qameta.allure.Step;
 
 public class PassengerServicesPage extends BasePage
 {
@@ -29,25 +31,30 @@ public class PassengerServicesPage extends BasePage
 	private By scheduleItemTrainName = By.className(properties.getProperty("passengerServices.scheduleItemTrainNameClsNm"));
 	private By scheduleItemDepartureTime = By.xpath(properties.getProperty("passengerServices.scheduleItemDepartureTimeXpath"));
 	private By scheduleItemInWayTime = By.xpath(properties.getProperty("passengerServices.scheduleItemInWayTimeXpath"));
+	private By dateFilterItems = By.xpath(properties.getProperty("passengerServices.dateFilterItemsXpath"));
 
+	@Step("RadioButton '{rbName}' should be checked")
 	public PassengerServicesPage shouldBeCheckedRadioButton(String rbName)
 	{
 		$(filterRadioButton.apply(rbName)).shouldHave(valueInAttribute("class", "active"));
 		return this;
 	}
 
+	@Step("Check Electronic Registration checkbox")
 	public PassengerServicesPage checkElectronicRegistrationCheckBox()
 	{
 		$(electronicRegistrationCheckBox).click();
 		return this;
 	}
 
+	@Step("Electronic Registration checkbox should be checked")
 	public PassengerServicesPage electronicRegistrationCheckBoxShouldBeChecked()
 	{
 		$(electronicRegistrationParentCheckBox).shouldHave(valueInAttribute("class", "checked"));
 		return this;
 	}
 
+	@Step("All schedule items contains '{buttonName}' button")
 	public PassengerServicesPage allScheduleItemsContainsButton(String buttonName)
 	{
 		$$(scheduleItems).forEach(item -> item.$(scheduleItemButton)
@@ -68,5 +75,12 @@ public class PassengerServicesPage extends BasePage
 				})
 				.collect(Collectors.toList());
 		return items;
+	}
+
+	@Step("Count of date filters should have size = {expSize}")
+	public PassengerServicesPage countOfDateFiltersShouldHaveSize(int expSize)
+	{
+		$$(dateFilterItems).shouldHave(size(expSize));
+		return this;
 	}
 }

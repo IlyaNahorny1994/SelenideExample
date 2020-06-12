@@ -13,6 +13,17 @@
 		<aspectj.version>1.8.10</aspectj.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>bintray</id>
+			<url>http://dl.bintray.com/epam/reportportal</url>
+		</repository>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.codeborne</groupId>
@@ -33,17 +44,30 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.30</version>
-<!--			<scope>test</scope>-->
-		</dependency>
-
-		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-testng</artifactId>
 			<version>2.13.3</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.epam.reportportal</groupId>
+			<artifactId>agent-java-testng</artifactId>
+			<!--			<version>5.0.0-RC-2</version>-->
+			<version>5.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.epam.reportportal</groupId>
+			<artifactId>logger-java-logback</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -66,12 +90,26 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
+
 					<argLine>
 						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 					</argLine>
 					<systemPropertyVariables>
 						<allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
 					</systemPropertyVariables>
+
+					<!--For RP-->
+					<!--					<properties>-->
+					<!--						<property>-->
+					<!--							<name>usedefaultlisteners</name>-->
+					<!--							<value>false</value>-->
+					<!--						</property>-->
+					<!--						<property>-->
+					<!--							<name>listener</name>-->
+					<!--							<value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>-->
+					<!--						</property>-->
+					<!--					</properties>-->
+
 				</configuration>
 				<dependencies>
 					<dependency>
