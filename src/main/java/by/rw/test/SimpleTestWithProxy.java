@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import by.rw.page.HomePage;
 import by.rw.page.PassengerServicesPage;
-import by.rw.framework.base.test.BaseProxyTest;
+import by.rw.test.base.BaseProxyTest;
 
 public class SimpleTestWithProxy extends BaseProxyTest
 {

@@ -1,4 +1,4 @@
-package by.rw.framework.base.test;
+package by.rw.test.base;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;

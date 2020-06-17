@@ -9,6 +9,12 @@
 	<version>1.0-SNAPSHOT</version>
 
 	<properties>
+		<config.browser>chrome</config.browser>
+		<config.url>https://www.rw.by/</config.url>
+		<config.timeout>6000</config.timeout>
+		<config.language>ru</config.language>
+		<config.rp.integration>false</config.rp.integration>
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<aspectj.version>1.8.10</aspectj.version>
 	</properties>
@@ -52,20 +58,31 @@
 		<dependency>
 			<groupId>com.epam.reportportal</groupId>
 			<artifactId>agent-java-testng</artifactId>
-			<!--			<version>5.0.0-RC-2</version>-->
 			<version>5.0.0</version>
 		</dependency>
 
+<!--		<dependency>-->
+<!--			<groupId>com.epam.reportportal</groupId>-->
+<!--			<artifactId>logger-java-logback</artifactId>-->
+<!--			<version>5.0.0</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>ch.qos.logback</groupId>-->
+<!--			<artifactId>logback-classic</artifactId>-->
+<!--			<version>1.2.3</version>-->
+<!--		</dependency>-->
+
 		<dependency>
-			<groupId>com.epam.reportportal</groupId>
-			<artifactId>logger-java-logback</artifactId>
-			<version>5.0.0</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.28</version>
 		</dependency>
 
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>2.12.1</version>
 		</dependency>
 
 	</dependencies>
@@ -88,7 +105,7 @@
 				<version>3.0.0-M4</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
+						<suiteXmlFile>src/main/resources/suite/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
 
 					<argLine>
@@ -120,6 +137,21 @@
 				</dependencies>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>*.properties</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>*.properties</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
-
 </project>

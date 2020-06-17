@@ -9,7 +9,7 @@ import java.util.List;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import by.rw.framework.base.test.BaseTest;
+import by.rw.test.base.BaseTest;
 import by.rw.model.ScheduleInfoModel;
 import by.rw.page.PassengerServicesPage;
 

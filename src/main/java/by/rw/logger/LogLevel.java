@@ -1,4 +1,4 @@
-package by.rw.framework.logger;
+package by.rw.logger;
 
 public enum LogLevel
 {

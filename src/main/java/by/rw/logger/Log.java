@@ -1,13 +1,13 @@
-package by.rw.framework.logger;
+package by.rw.logger;
 
+import static by.rw.util.AllureAttachment.attachText;
 import static com.codeborne.selenide.Selenide.screenshot;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.util.Calendar;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.google.common.io.BaseEncoding;
 
@@ -16,12 +16,13 @@ import by.rw.util.RandomUtil;
 public class Log
 {
 	private final Logger logger;
+	private static final String ACTION_MESSAGE_SEPARATOR = "----- {}";
 	private static final String SCREENSHOT_MESSAGE = "Screenshot";
 	private static final String LOG_MESSAGE_TEMPLATE = "%s; Screenshot is saved in: %s";
 
 	public Log(String className)
 	{
-		logger = LoggerFactory.getLogger(className);
+		logger = LogManager.getLogger(className);
 	}
 
 	public void info(String msg)
@@ -37,6 +38,12 @@ public class Log
 	public void info(String msg, Object... args)
 	{
 		logger.info(msg, args);
+	}
+
+	public void action(String msg)
+	{
+		logger.info(ACTION_MESSAGE_SEPARATOR, msg);
+		attachText(msg);
 	}
 
 	public void log(byte[] bytes, String message)

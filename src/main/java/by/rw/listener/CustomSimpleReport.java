@@ -1,4 +1,4 @@
-package by.rw.util;
+package by.rw.listener;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -11,6 +11,8 @@ import com.codeborne.selenide.logevents.EventsCollector;
 import com.codeborne.selenide.logevents.LogEvent;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.codeborne.selenide.logevents.SimpleReport;
+
+import by.rw.util.AllureAttachment;
 
 public class CustomSimpleReport extends SimpleReport
 {
@@ -46,7 +48,7 @@ public class CustomSimpleReport extends SimpleReport
 
 			sb.append(delimiter);
 			log.info(sb.toString());
-//			AllureAttachment.attachText(sb.toString());
+			AllureAttachment.attachText(sb.toString());
 		}
 	}
 

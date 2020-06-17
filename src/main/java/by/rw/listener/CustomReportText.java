@@ -4,8 +4,6 @@ import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
-import by.rw.util.CustomSimpleReport;
-
 public class CustomReportText implements IInvokedMethodListener
 {
 	protected CustomSimpleReport report = new CustomSimpleReport();

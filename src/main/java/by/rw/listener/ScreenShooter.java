@@ -1,14 +1,9 @@
 package by.rw.listener;
 
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
 import org.testng.reporters.ExitCodeListener;
 
-import by.rw.framework.logger.Log;
-import by.rw.framework.logger.LogLevel;
+import by.rw.logger.Log;
 import by.rw.util.AllureAttachment;
 
 public class ScreenShooter extends ExitCodeListener

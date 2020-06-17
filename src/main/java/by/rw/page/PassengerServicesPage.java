@@ -1,6 +1,6 @@
 package by.rw.page;
 
-import static by.rw.framework.selenide.CustomCondition.valueInAttribute;
+import static by.rw.selenide.CustomCondition.valueInAttribute;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.text;
@@ -20,8 +20,7 @@ import io.qameta.allure.Step;
 
 public class PassengerServicesPage extends BasePage
 {
-
-	Function<String, By> filterRadioButton = text -> By.xpath(
+	private Function<String, By> filterRadioButton = text -> By.xpath(
 			String.format(properties.getProperty("passengerServices.radioButtonXpath"), text));
 	private By electronicRegistrationCheckBox = By.xpath(properties.getProperty("passengerServices.electronicRegistrationCheckBoxXpath"));
 	private By electronicRegistrationParentCheckBox = By.xpath(
@@ -65,7 +64,7 @@ public class PassengerServicesPage extends BasePage
 
 	public List<ScheduleInfoModel> getAllScheduleItems()
 	{
-		List<ScheduleInfoModel> items = $$(scheduleItems)
+		return $$(scheduleItems)
 				.stream()
 				.map(item -> {
 					SelenideElement trainNameElem = item.$(scheduleItemTrainName);
@@ -74,7 +73,6 @@ public class PassengerServicesPage extends BasePage
 					return new ScheduleInfoModel(trainNameElem.text(), departureTimeElem.text(), inWayTimeElem.text());
 				})
 				.collect(Collectors.toList());
-		return items;
 	}
 
 	@Step("Count of date filters should have size = {expSize}")

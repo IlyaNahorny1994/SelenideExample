@@ -1,8 +1,9 @@
 package by.rw.page;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.page;
+
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
 
@@ -18,6 +19,9 @@ public class HomePage extends BasePage
 	private By dateInput = By.id(properties.getProperty("homePage.dateID"));
 	private By activeDateCell = By.xpath(properties.getProperty("homePage.activeDateXpath"));
 	private By submitBtn = By.xpath(properties.getProperty("homePage.submitXpath"));
+	private By langLabel = By.className(properties.getProperty("homePage.langTextClassName"));
+	Function<Locale, By> languageItem = lang -> By.xpath(
+			String.format(properties.getProperty("homePage.langItemXpath"), lang.getLocaleText()));
 
 	@Step("Fill in 'From' field with '{value}' value")
 	public HomePage fillInFromField(String value)
@@ -38,7 +42,6 @@ public class HomePage extends BasePage
 	{
 		$(dateInput).val(value);
 		$(activeDateCell).click();
-//		executeJavaScript("$(arguments[0]).val(arguments[1])", $(dateInput), value);
 		return this;
 	}
 
@@ -52,21 +55,20 @@ public class HomePage extends BasePage
 	@Step("Search way with following values: {from} - {to} - {when}")
 	public PassengerServicesPage searchWay(String from, String to, String when)
 	{
-		$(fromInput).val(from);
-		$(toInput).val(to);
-		$(dateInput).val(when);
-		$(activeDateCell).click();
+		fillInFromField(from);
+		fillInToField(to);
+		fillInWhereField(when);
 		return submit();
 	}
 
 	@Step("Set language to '{locale}'")
 	public HomePage setLanguage(Locale locale)
 	{
-		boolean isExist = $(By.xpath(String.format("//*[@class='lang-select']//a[contains(@href, '%s')]", locale.getLocaleText()))).is(Condition.exist);
+		boolean isExist = $(languageItem.apply(locale)).is(Condition.exist);
 		if(isExist)
 		{
-			$(By.className("langText")).click();
-			$(By.xpath(String.format("//*[@class='lang-select']//a[contains(@href, '%s')]", locale.getLocaleText()))).click();
+			$(langLabel).click();
+			$(languageItem.apply(locale)).click();
 		}
 		return this;
 	}

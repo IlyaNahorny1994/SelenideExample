@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Some suite">
+	<test name="SimpleTest">
+		<classes>
+			<class name="by.rw.test.SimpleTest">
+<!--								<methods>-->
+<!--									<include name="verifyOneWayRadioButtonIsCheckedByDefault"/>-->
+<!--								</methods>-->
+			</class>
+		</classes>
+	</test>
+	<test name="SimpleTestWithProxy">
+		<classes>
+			<class name="by.rw.test.SimpleTestWithProxy">
+			</class>
+		</classes>
+	</test>
+</suite>

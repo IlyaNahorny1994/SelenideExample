@@ -8,6 +8,7 @@ import org.testng.Assert;
 import com.browserup.bup.BrowserUpProxy;
 
 import by.rw.page.BasePage;
+import io.qameta.allure.Step;
 
 public class TrafficManager
 {
@@ -18,6 +19,7 @@ public class TrafficManager
 		this.proxy = proxy;
 	}
 
+	@Step("Count of requests with '{partOfUrl}' template should be more than '{moreThan}'")
 	public <T extends BasePage> T countOfRequestsWithTemplateShouldBeMoreThan(String partOfUrl, int moreThan, Class<T> cls)
 	{
 		List<String> urlsWithPng = proxy.getHar().getLog().getEntries()
@@ -31,6 +33,7 @@ public class TrafficManager
 		return getCurrentPage(cls);
 	}
 
+	@Step("Set har value = '{har}'")
 	public <T extends BasePage> T setHar(String har, Class<T> cls)
 	{
 		proxy.newHar(har);
